@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --main-bg-color: #252045ff;
+  --main-fg-color: #ffffff;
+  --primary-color: #67a5eb;
+  --primary-color-hover-focused: #45526e;
+  --primary-color-active: #92bdeeff;
+  --default-color: #393b3c;
+  --default-color-hover-focused: #747474;
+  --success-color: #308e21;
+  --danger-color: #ff7575;
+  --elem-color: #dc5dfc;
+  --elem-color-hover-focus: #9747ff;
+}
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+
+  color: var(--main-fg-color);
+  background-color: var(--main-bg-color);
+  background-image: linear-gradient(to bottom, #252045ff, #6a5dc2);
+}
