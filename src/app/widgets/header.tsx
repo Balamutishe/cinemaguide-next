@@ -6,22 +6,22 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export const Header = () => {
   return (
-    <header className="flex justify-between items-center h-[96px] px-10 py-4">
-      <Image src={Logo} alt="Logo" className="w-min h-1/2" priority />
-      <nav className="flex justify-between items-center w-[70%]">
+    <header className="flex h-[96px] items-center justify-between px-10 py-4">
+      <Image src={Logo} alt="Logo" className="h-1/2 w-min" priority />
+      <nav className="flex w-[70%] items-center justify-between">
         <Link
           href={"/"}
-          className="flex justify-center w-min mr-14 py-2 hover:text-(--elem-color) transition-colors"
+          className="mr-14 flex h-max w-min justify-center border-b-2 border-b-transparent py-2 transition-colors hover:border-b-2 hover:border-(--elem-color) hover:text-(--elem-color)"
         >
           Главная
         </Link>
         <Link
           href={"/genre"}
-          className="flex justify-center w-min mr-14 py-2 hover:text-(--elem-color) transition-colors"
+          className="mr-14 flex w-min justify-center border-b-2 border-b-transparent py-2 transition-colors hover:border-b-2 hover:border-(--elem-color) hover:text-(--elem-color)"
         >
           Жанры
         </Link>
-        <div className="relative flex flex-1 flex-shrink-0">
+        <div className="relative flex flex-1">
           <label htmlFor="search" className="sr-only">
             Search
           </label>
@@ -29,12 +29,15 @@ export const Header = () => {
             type="text"
             name="search"
             placeholder="Поиск"
-            className="peer block w-full h-full rounded-md py-4 pl-10 text-base placeholder:text-gray-400 bg-(--default-color) outline-(--elem-color) hover:outline-[2px] focus:outline-[2px] hover:placeholder:text-(--elem-color) transition-colors cursor-pointer"
+            className="peer block h-full w-full cursor-pointer rounded-md bg-(--default-color) py-4 pl-10 text-base outline-(--elem-color) transition-colors placeholder:text-gray-400 hover:outline-[2px] hover:placeholder:text-(--elem-color) focus:outline-[2px]"
           />
-          <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-400 peer-hover:text-(--elem-color) peer-focus:text-(--elem-color)" />
+          <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-[18px] w-[18px] -translate-y-1/2 text-gray-400 peer-hover:text-(--elem-color) peer-focus:text-(--elem-color)" />
         </div>
       </nav>
-      <Button variant="header" className="w-min">
+      <Button
+        variant="header"
+        className="w-min border-b-2 border-b-transparent hover:border-b-2 hover:border-(--elem-color)"
+      >
         Войти
       </Button>
     </header>
