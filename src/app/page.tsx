@@ -1,11 +1,15 @@
 import { Header } from "@/app/widgets/header";
 import { Footer } from "@/app/widgets/footer";
+import { Preview } from "./widgets/preview";
+import { Main } from "./widgets/main";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="px-10 py-4">Main</main>
+      <Main>
+        <Preview />
+      </Main>
       <Footer />
     </>
   );

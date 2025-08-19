@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant: "primary" | "default" | "header";
+  variant: "primary" | "default" | "header" | "icon";
 }
 
 export function Button({ children, variant, className, ...rest }: ButtonProps) {
@@ -10,11 +10,11 @@ export function Button({ children, variant, className, ...rest }: ButtonProps) {
     <button
       {...rest}
       className={clsx(
-        "flex items-center py-2 font-medium transition-colors",
+        "flex items-center py-4 font-medium transition-colors",
         {
-          "px-4rounded-lg bg-(--primary-color) hover:bg-(--primary-color-hover-focused) active:bg-(--primary-color-active)":
+          "rounded-3xl bg-(--primary-color) px-10 text-lg font-bold hover:bg-(--primary-color-hover-focused) active:bg-(--primary-color-active)":
             variant === "primary",
-          "rounded-lg bg-(--default-color) px-4 hover:bg-(--default-color-hover-focused) active:bg-(--default-color-active)":
+          "rounded-3xl bg-(--default-color) px-10 text-lg font-bold hover:bg-(--default-color-hover-focused) active:bg-(--default-color-active)":
             variant === "default",
           "font-normal hover:text-(--elem-color)": variant === "header",
         },

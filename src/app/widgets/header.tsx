@@ -6,8 +6,8 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export const Header = () => {
   return (
-    <header className="flex h-[96px] items-center justify-between px-10 py-4">
-      <Image src={Logo} alt="Logo" className="h-1/2 w-min" priority />
+    <header className="flex h-[96px] items-center justify-between px-20 py-6">
+      <Image src={Logo} alt="Logo" className="h-2/3 w-min" priority />
       <nav className="flex w-[70%] items-center justify-between">
         <Link
           href={"/"}

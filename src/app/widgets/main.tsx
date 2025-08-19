@@ -3,5 +3,5 @@ export const Main = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return <main className="px-10 py-4">{children}</main>;
+  return <main className="px-20 py-6">{children}</main>;
 };
