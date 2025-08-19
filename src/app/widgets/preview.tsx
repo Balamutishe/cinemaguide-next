@@ -5,7 +5,7 @@ import { HeartIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export const Preview = () => {
   return (
-    <section className="grid grid-cols-2 justify-between gap-x-8">
+    <section className="mb-10 grid grid-cols-2 justify-between gap-x-8">
       <PreviewContent />
       <PreviewImage />
     </section>
