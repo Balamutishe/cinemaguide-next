@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import PreviewTest from "@/images/preview-test.jpg";
 import { HeartIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/20/solid";
 
 export const Preview = () => {
   return (
@@ -16,8 +17,11 @@ const PreviewContent = () => {
   return (
     <div className="flex flex-col justify-center">
       <div className="mb-16">
-        <div className="mb-2 flex w-[40%] justify-between text-base opacity-70">
-          <span>7.5</span>
+        <div className="mb-4 flex w-[48%] items-center justify-between text-base opacity-70">
+          <span className="flex justify-between rounded-2xl bg-green-500 px-3 py-1">
+            <StarIcon className="mr-2 h-5 w-5 text-white" />
+            <span className="text-md font-extrabold">7.5</span>
+          </span>
           <span>Детектив</span>
           <span>1979</span>
           <span>1ч 7мин</span>
