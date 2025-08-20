@@ -3,35 +3,48 @@ import { Button } from "../ui/button";
 import PreviewTest from "@/images/preview-test.jpg";
 import { HeartIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
+import { getRandomFilm } from "../api/movie";
+import { FC } from "react";
+import { TMovie } from "../types/movie";
+import { revalidatePath } from "next/cache";
 
-export const Preview = () => {
+export const Preview = async () => {
+  const filmData = await getRandomFilm();
+
   return (
-    <section className="mb-10 grid grid-cols-2 justify-between gap-x-8">
-      <PreviewContent />
-      <PreviewImage />
+    <section className="mb-10 grid h-[586px] grid-cols-2 justify-between gap-x-8">
+      <PreviewContent filmData={filmData} />
+      <PreviewImage posterUrl={filmData.posterUrl} />
     </section>
   );
 };
 
-const PreviewContent = () => {
+interface IPreviewContentProps {
+  filmData: TMovie;
+}
+
+const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
+  async function revalidate() {
+    "use server";
+    revalidatePath("/");
+  }
+
   return (
     <div className="flex flex-col justify-center">
       <div className="mb-16">
         <div className="mb-4 flex w-[48%] items-center justify-between text-base opacity-70">
           <span className="flex justify-between rounded-2xl bg-green-500 px-3 py-1">
             <StarIcon className="mr-2 h-5 w-5 text-white" />
-            <span className="text-md font-extrabold">7.5</span>
+            <span className="text-md font-extrabold">
+              {filmData.tmdbRating}
+            </span>
           </span>
-          <span>Детектив</span>
-          <span>1979</span>
-          <span>1ч 7мин</span>
+          <span>{filmData.genres}</span>
+          <span>{filmData.relaseYear}</span>
+          <span>{filmData.runtime}</span>
         </div>
-        <h1 className="mb-4 text-5xl font-bold">
-          Шерлок Холмс и доктор Ватсон: Знакомство
-        </h1>
-        <p className="text-2xl font-light opacity-70">
-          Увлекательные приключения самого известного сыщика всех времен
-        </p>
+        <h1 className="mb-4 text-5xl font-bold">{filmData.title}</h1>
+        <p className="text-2xl font-light opacity-70">{filmData.plot}</p>
       </div>
       <div className="flex w-[85%] justify-between">
         <Button variant="primary">Трейлер</Button>
@@ -39,19 +52,26 @@ const PreviewContent = () => {
         <Button variant="default">
           {<HeartIcon className="h-5 w-4.5 text-white" />}
         </Button>
-        <Button variant="default">
-          {<ArrowPathIcon className="h-5 w-4.5 text-white" />}
-        </Button>
+        <form action={revalidate}>
+          <Button variant="default" type="submit">
+            {<ArrowPathIcon className="h-5 w-4.5 text-white" />}
+          </Button>
+        </form>
       </div>
     </div>
   );
 };
 
-const PreviewImage = () => {
+interface IPreviewImageProps {
+  posterUrl: string;
+}
+
+const PreviewImage: FC<IPreviewImageProps> = ({ posterUrl }) => {
   return (
-    <div>
+    <div className="relative">
       <Image
-        src={PreviewTest}
+        fill={true}
+        src={posterUrl}
         alt="Preview image"
         className="rounded-3xl shadow-xl/50 shadow"
       />

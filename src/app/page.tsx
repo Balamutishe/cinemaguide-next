@@ -4,7 +4,7 @@ import { Preview } from "./widgets/preview";
 import { Main } from "./widgets/main";
 import { List } from "./widgets/list";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Header />
