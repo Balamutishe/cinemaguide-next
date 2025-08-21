@@ -32,3 +32,6 @@ export const MovieSchema = z.object({
 export type TMovie = z.infer<typeof MovieSchema>;
 export const MovieListSchema = z.array(MovieSchema);
 export type TMovieList = z.infer<typeof MovieListSchema>;
+
+export const MoviesGenresSchema = z.array(z.string());
+export type TMoviesGenres = z.infer<typeof MoviesGenresSchema>;

@@ -16,7 +16,7 @@ export const Header = () => {
           Главная
         </Link>
         <Link
-          href={"/genre"}
+          href={"/movie/genres"}
           className="mr-14 flex w-min justify-center border-b-2 border-b-transparent py-2 transition-colors hover:border-b-2 hover:border-(--elem-color) hover:text-(--elem-color)"
         >
           Жанры

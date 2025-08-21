@@ -1,5 +1,9 @@
 import axios from "axios";
-import { MovieListSchema, MovieSchema } from "../types/movie";
+import {
+  MovieListSchema,
+  MovieSchema,
+  MoviesGenresSchema,
+} from "../types/movie";
 
 const instance = axios.create({
   baseURL: "https://cinemaguide.skillbox.cc",
@@ -15,5 +19,13 @@ export const getRandomFilm = () =>
 export const getTopFilms = () =>
   instance.get("/movie/top10").then((res) => MovieListSchema.parse(res.data));
 
+export const getMovies = () =>
+  instance.get("/movie").then((res) => MovieListSchema.parse(res.data));
+
 export const getMovie = (id: string) =>
   instance.get(`/movie/${id}`).then((res) => MovieSchema.parse(res.data));
+
+export const getMoviesGenres = () =>
+  instance
+    .get("/movie/genres")
+    .then((res) => MoviesGenresSchema.parse(res.data));
