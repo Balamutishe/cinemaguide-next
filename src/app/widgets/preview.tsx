@@ -2,15 +2,17 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { HeartIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { getRandomFilm } from "../api/movie";
 import { FC } from "react";
 import { TMovie } from "../types/movie";
 import { revalidatePath } from "next/cache";
 import NoImage from "@/images/no_image.png";
+import clsx from "clsx";
 
-export const Preview = async () => {
-  const filmData = await getRandomFilm();
+interface IPreviewProps {
+  filmData: TMovie;
+}
 
+export const Preview: FC<IPreviewProps> = ({ filmData }) => {
   return (
     <section className="mb-10 grid h-[586px] grid-cols-2 justify-between gap-x-8">
       <PreviewContent filmData={filmData} />
@@ -33,7 +35,17 @@ const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
     <div className="flex flex-col justify-center">
       <div className="mb-16">
         <div className="mb-4 flex items-center text-base opacity-70">
-          <span className="mr-4 flex justify-between rounded-2xl bg-green-500 px-3 py-1">
+          <span
+            className={clsx(
+              "mr-4 flex justify-between rounded-2xl bg-green-500 px-4 py-1",
+              {
+                "bg-red-500": filmData.tmdbRating < 4,
+                "bg-yellow-500":
+                  filmData.tmdbRating >= 4 && filmData.tmdbRating < 7,
+                "bg-green-500": filmData.tmdbRating >= 7,
+              },
+            )}
+          >
             <StarIcon className="mr-2 h-5 w-5 text-white" />
             <span className="text-md font-extrabold">
               {filmData.tmdbRating}
@@ -42,7 +54,11 @@ const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
           <span>
             {filmData.genres.map(
               (genre, index) =>
-                index < 3 && <span className="mr-4">{genre}</span>,
+                index < 3 && (
+                  <span key={index} className="mr-4">
+                    {genre}
+                  </span>
+                ),
             )}
           </span>
           <span>{filmData.relaseYear}</span>
