@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
-import PreviewTest from "@/images/preview-test.jpg";
 import { HeartIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { getRandomFilm } from "../api/movie";
 import { FC } from "react";
 import { TMovie } from "../types/movie";
 import { revalidatePath } from "next/cache";
+import NoImage from "@/images/no_image.png";
 
 export const Preview = async () => {
   const filmData = await getRandomFilm();
@@ -32,19 +32,35 @@ const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
   return (
     <div className="flex flex-col justify-center">
       <div className="mb-16">
-        <div className="mb-4 flex w-[48%] items-center justify-between text-base opacity-70">
-          <span className="flex justify-between rounded-2xl bg-green-500 px-3 py-1">
+        <div className="mb-4 flex items-center text-base opacity-70">
+          <span className="mr-4 flex justify-between rounded-2xl bg-green-500 px-3 py-1">
             <StarIcon className="mr-2 h-5 w-5 text-white" />
             <span className="text-md font-extrabold">
               {filmData.tmdbRating}
             </span>
           </span>
-          <span>{filmData.genres}</span>
+          <span>
+            {filmData.genres.map(
+              (genre, index) =>
+                index < 3 && <span className="mr-4">{genre}</span>,
+            )}
+          </span>
           <span>{filmData.relaseYear}</span>
-          <span>{filmData.runtime}</span>
+          <span>{filmData.runtime} min</span>
         </div>
         <h1 className="mb-4 text-5xl font-bold">{filmData.title}</h1>
-        <p className="text-2xl font-light opacity-70">{filmData.plot}</p>
+        <p
+          className="text-2xl font-light opacity-70"
+          style={{
+            display: "-webkit-box",
+            lineClamp: "initial",
+            WebkitLineClamp: "5",
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {filmData.plot}
+        </p>
       </div>
       <div className="flex w-[85%] justify-between">
         <Button variant="primary">Трейлер</Button>
@@ -63,7 +79,7 @@ const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
 };
 
 interface IPreviewImageProps {
-  posterUrl: string;
+  posterUrl: string | null;
 }
 
 const PreviewImage: FC<IPreviewImageProps> = ({ posterUrl }) => {
@@ -71,7 +87,8 @@ const PreviewImage: FC<IPreviewImageProps> = ({ posterUrl }) => {
     <div className="relative">
       <Image
         fill={true}
-        src={posterUrl}
+        sizes="100vw, 100vw"
+        src={posterUrl ? posterUrl : NoImage}
         alt="Preview image"
         className="rounded-3xl shadow-xl/50 shadow"
       />

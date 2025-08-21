@@ -14,7 +14,7 @@ export const MovieSchema = z.object({
   revenue: z.union([z.string(), z.undefined(), z.null()]),
   homepage: z.string(),
   status: z.string(),
-  posterUrl: z.string(),
+  posterUrl: z.union([z.string(), z.null()]),
   backdropUrl: z.union([z.string(), z.undefined(), z.null()]),
   trailerUrl: z.string(),
   trailerYoutubeId: z.union([z.string(), z.undefined(), z.null()]),
