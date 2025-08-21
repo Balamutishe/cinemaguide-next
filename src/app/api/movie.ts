@@ -14,3 +14,6 @@ export const getRandomFilm = () =>
 
 export const getTopFilms = () =>
   instance.get("/movie/top10").then((res) => MovieListSchema.parse(res.data));
+
+export const getMovie = (id: string) =>
+  instance.get(`/movie/${id}`).then((res) => MovieSchema.parse(res.data));

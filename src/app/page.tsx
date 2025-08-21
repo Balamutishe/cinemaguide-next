@@ -15,7 +15,7 @@ export default async function Home() {
       <Header />
       <Main>
         <Suspense fallback={<div>Loading preview random film...</div>}>
-          <Preview filmData={randomFilmData} />
+          <Preview variant="random" filmData={randomFilmData} />
         </Suspense>
         <Suspense fallback={<div>Loading list movies...</div>}>
           <List title="Топ 10 фильмов" movieList={topFilmsData} />

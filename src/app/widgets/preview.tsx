@@ -7,25 +7,28 @@ import { TMovie } from "../types/movie";
 import { revalidatePath } from "next/cache";
 import NoImage from "@/images/no_image.png";
 import clsx from "clsx";
+import Link from "next/link";
 
 interface IPreviewProps {
+  variant: "random" | "specific";
   filmData: TMovie;
 }
 
-export const Preview: FC<IPreviewProps> = ({ filmData }) => {
+export const Preview: FC<IPreviewProps> = ({ variant, filmData }) => {
   return (
     <section className="mb-10 grid h-[586px] grid-cols-2 justify-between gap-x-8">
-      <PreviewContent filmData={filmData} />
+      <PreviewContent filmData={filmData} variant={variant} />
       <PreviewImage posterUrl={filmData.posterUrl} />
     </section>
   );
 };
 
 interface IPreviewContentProps {
+  variant: "random" | "specific";
   filmData: TMovie;
 }
 
-const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
+const PreviewContent: FC<IPreviewContentProps> = ({ variant, filmData }) => {
   async function revalidate() {
     "use server";
     revalidatePath("/");
@@ -78,17 +81,32 @@ const PreviewContent: FC<IPreviewContentProps> = ({ filmData }) => {
           {filmData.plot}
         </p>
       </div>
-      <div className="flex w-[85%] justify-between">
-        <Button variant="primary">Трейлер</Button>
-        <Button variant="default">О фильме</Button>
+      <div
+        className={clsx("flex w-[85%]", {
+          "justify-between": variant === "random",
+        })}
+      >
+        <Button
+          variant="primary"
+          className={clsx({ "mr-5": variant === "specific" })}
+        >
+          Трейлер
+        </Button>
+        {variant === "random" && (
+          <Link href={`/movie/${filmData.id}`}>
+            <Button variant="default">О фильме</Button>
+          </Link>
+        )}
         <Button variant="default">
           {<HeartIcon className="h-5 w-4.5 text-white" />}
         </Button>
-        <form action={revalidate}>
-          <Button variant="default" type="submit">
-            {<ArrowPathIcon className="h-5 w-4.5 text-white" />}
-          </Button>
-        </form>
+        {variant === "random" && (
+          <form action={revalidate}>
+            <Button variant="default" type="submit">
+              {<ArrowPathIcon className="h-5 w-4.5 text-white" />}
+            </Button>
+          </form>
+        )}
       </div>
     </div>
   );
