@@ -36,8 +36,17 @@ const MoviesItems: FC<IMoviesItemsProps> = ({ movieList }) => {
   return movieList!.map((movie) => (
     <li key={movie.id} className="relative min-h-76">
       <Link href={`movie/${movie.id}`}>
-        <span className="absolute top-[-0.2rem] left-[-1rem] z-10 rounded-3xl bg-white px-5 py-1 font-bold text-(--elem-color-hover-focus)">
-          {movie.tmdbRating}
+        <span
+          className={clsx(
+            "absolute top-[-0.2rem] left-[-1rem] z-10 rounded-3xl bg-white px-5 py-1 font-bold text-(--elem-color-hover-focus)",
+            {
+              "text-green-500": movie.tmdbRating >= 7,
+              "text-yellow-500": movie.tmdbRating < 7,
+              "text-red-500": movie.tmdbRating < 5,
+            },
+          )}
+        >
+          {movie.tmdbRating.toFixed(1)}
         </span>
         <div className="relative z-0 h-full w-full rounded-2xl">
           <Image
