@@ -6,10 +6,14 @@ import { Preview } from "@/app/widgets/preview";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-export default async function Page(props: { params: { id?: string } }) {
-  if (!props.params.id) notFound();
+export default async function Page(props: {
+  params: Promise<{ id?: string }>;
+}) {
+  const params = await props.params;
 
-  const filmData = await getMovie(props.params.id);
+  if (!params.id) notFound();
+
+  const filmData = await getMovie(params.id);
 
   return (
     <>
