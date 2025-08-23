@@ -13,6 +13,7 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ title, movieList, genresList }) => {
+  console.log(movieList?.length);
   return (
     <section>
       <div className="flex justify-between">
@@ -75,7 +76,7 @@ interface IGenresItemsProps {
 const GenresItems: FC<IGenresItemsProps> = ({ genresList }) => {
   return genresList!.map((item) => (
     <li key={crypto.randomUUID()} className="min-h-76 rounded-2xl bg-black">
-      <Link href={`/movie?page=1&count=15&genre=${item.genre}`}>
+      <Link href={`/movie?genre=${item.genre}&count=15`}>
         <div className="relative z-0 h-[70%] w-full rounded-t-2xl">
           <Image
             fill
