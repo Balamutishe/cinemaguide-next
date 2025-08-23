@@ -1,14 +1,21 @@
+"use server";
+
 import { Button } from "@/app/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/images/logo.svg";
 import { Search } from "./search";
-import { Suspense } from "react";
 
-export const Header = () => {
+export default async function Header() {
   return (
     <header className="flex h-[96px] items-center justify-between px-20 py-6">
-      <Image src={Logo} alt="Logo" className="h-2/3 w-min" priority />
+      <Image
+        height={48}
+        width={48}
+        src={"/images/logo.svg"}
+        alt="Logo"
+        className="h-2/3 w-min"
+        priority
+      />
       <nav className="flex w-[70%] items-center justify-between">
         <Link
           href={"/"}
@@ -22,9 +29,7 @@ export const Header = () => {
         >
           Жанры
         </Link>
-        <Suspense>
-          <Search />
-        </Suspense>
+        <Search />
       </nav>
       <Button
         variant="header"
@@ -34,4 +39,4 @@ export const Header = () => {
       </Button>
     </header>
   );
-};
+}

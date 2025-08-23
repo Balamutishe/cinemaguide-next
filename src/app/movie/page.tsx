@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Header } from "../widgets/header";
+import Header from "../widgets/header";
 import { Main } from "../widgets/main";
 import { List } from "../widgets/list";
 import { Footer } from "../widgets/footer";

@@ -1,6 +1,6 @@
 import { getMovie } from "@/app/api/movie";
 import { Footer } from "@/app/widgets/footer";
-import { Header } from "@/app/widgets/header";
+import Header from "@/app/widgets/header";
 import { Main } from "@/app/widgets/main";
 import { Preview } from "@/app/widgets/preview";
 import { notFound } from "next/navigation";

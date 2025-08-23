@@ -13,7 +13,6 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ title, movieList, genresList }) => {
-  console.log(movieList?.length);
   return (
     <section>
       <div className="flex justify-between">
