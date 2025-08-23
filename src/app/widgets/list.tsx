@@ -4,6 +4,7 @@ import { FC } from "react";
 import { TMovieList } from "../types/movie";
 import Link from "next/link";
 import clsx from "clsx";
+import Pagination from "./pagination";
 
 interface IListProps {
   title: string;
@@ -14,7 +15,12 @@ interface IListProps {
 export const List: FC<IListProps> = ({ title, movieList, genresList }) => {
   return (
     <section>
-      <h2 className="mb-10 text-4xl font-bold">{title}</h2>
+      <div className="flex justify-between">
+        <h2 className="mb-10 text-4xl font-bold">{title}</h2>
+        {title !== "Топ 10 фильмов" && movieList && (
+          <Pagination totalPages={movieList.length} />
+        )}
+      </div>
       <ul
         className={clsx("grid gap-8", {
           "grid-cols-5 grid-rows-2": movieList,
@@ -69,7 +75,7 @@ interface IGenresItemsProps {
 const GenresItems: FC<IGenresItemsProps> = ({ genresList }) => {
   return genresList!.map((item) => (
     <li key={crypto.randomUUID()} className="min-h-76 rounded-2xl bg-black">
-      <Link href={`/movie?genre=${item.genre}`}>
+      <Link href={`/movie?page=1&count=15&genre=${item.genre}`}>
         <div className="relative z-0 h-[70%] w-full rounded-t-2xl">
           <Image
             fill

@@ -14,9 +14,12 @@ export default async function Page(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const filmsData = await getMovies(
-    `page=1&count=15&genre=${searchParams.genre}`,
-  );
+  const searchString = Object.entries(searchParams)
+    .flatMap(([key, value]) => `${key}=${value}`)
+    .toString()
+    .replaceAll(",", "&");
+
+  const filmsData = await getMovies(searchString);
 
   return (
     <>

@@ -51,7 +51,7 @@ const PreviewContent: FC<IPreviewContentProps> = ({ variant, filmData }) => {
           >
             <StarIcon className="mr-2 h-5 w-5 text-white" />
             <span className="text-md font-extrabold">
-              {filmData.tmdbRating}
+              {filmData.tmdbRating.toFixed(1)}
             </span>
           </span>
           <span>
@@ -120,6 +120,7 @@ const PreviewImage: FC<IPreviewImageProps> = ({ posterUrl }) => {
   return (
     <div className="relative">
       <Image
+        priority
         fill={true}
         sizes="100vw, 100vw"
         src={posterUrl ? posterUrl : NoImage}
