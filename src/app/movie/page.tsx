@@ -26,10 +26,7 @@ export default async function Page(props: {
       <Header />
       <Main>
         <Suspense fallback={<div>Loading list movies...</div>}>
-          <List
-            title={searchParams?.genre || "Жанр не найден"}
-            movieList={filmsData}
-          />
+          <List title={searchParams?.genre || ""} movieList={filmsData} />
         </Suspense>
       </Main>
       <Footer />
