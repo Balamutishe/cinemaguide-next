@@ -10,7 +10,7 @@ export function Button({ children, variant, className, ...rest }: ButtonProps) {
     <button
       {...rest}
       className={clsx(
-        "flex items-center py-4 font-medium transition-colors",
+        "flex cursor-pointer items-center py-4 font-medium transition-colors",
         {
           "rounded-3xl bg-(--primary-color) px-10 text-lg font-bold hover:bg-(--primary-color-hover-focused) active:bg-(--primary-color-active)":
             variant === "primary",
