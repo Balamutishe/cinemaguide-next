@@ -6,7 +6,7 @@ import { Preview } from "./widgets/preview";
 import { Main } from "./widgets/main";
 import { List } from "./widgets/list";
 import { getRandomFilm, getTopFilms } from "./api/movie";
-import { Suspense } from "react";
+import { Modal } from "./widgets/modal";
 
 export default async function Home() {
   const randomFilmData = await getRandomFilm();
@@ -14,16 +14,11 @@ export default async function Home() {
 
   return (
     <>
-      <Suspense>
-        <Header />
-      </Suspense>
+      <Header />
       <Main>
-        <Suspense fallback={<div>Loading preview random film...</div>}>
-          <Preview variant="random" filmData={randomFilmData} />
-        </Suspense>
-        <Suspense fallback={<div>Loading list movies...</div>}>
-          <List title="Топ 10 фильмов" movieList={topFilmsData} />
-        </Suspense>
+        <Preview variant="random" filmData={randomFilmData} />
+        <List title="Топ 10 фильмов" movieList={topFilmsData} />
+        <Modal />
       </Main>
       <Footer />
     </>

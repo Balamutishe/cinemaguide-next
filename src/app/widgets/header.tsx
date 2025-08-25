@@ -1,9 +1,9 @@
 "use server";
 
-import { Button } from "@/app/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { Search } from "./search";
+import { OpenForm } from "../features/form/open-form";
 
 export default async function Header() {
   return (
@@ -31,12 +31,7 @@ export default async function Header() {
         </Link>
         <Search />
       </nav>
-      <Button
-        variant="header"
-        className="w-min border-b-2 border-b-transparent hover:border-b-2 hover:border-(--elem-color)"
-      >
-        Войти
-      </Button>
+      <OpenForm />
     </header>
   );
 }
