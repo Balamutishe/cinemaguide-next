@@ -15,8 +15,8 @@ interface IListProps {
 export const List: FC<IListProps> = ({ title, movieList, genresList }) => {
   return (
     <section>
-      <div className="flex justify-between">
-        <h2 className="mb-10 text-4xl font-bold">{title}</h2>
+      <div className="mb-10 flex justify-between">
+        <h2 className="text-4xl font-bold">{title}</h2>
         {title !== "Топ 10 фильмов" && movieList && (
           <Pagination totalPages={movieList.length} />
         )}

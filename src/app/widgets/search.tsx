@@ -23,7 +23,7 @@ export const Search = () => {
     }
 
     if (pathname.match("/")) {
-      push(`/movie?${params.toString()}`);
+      push(`/movie?count=15&${params.toString()}`);
     }
 
     if (pathname.match("/movie")) {
